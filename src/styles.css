@@ -1,0 +1,15 @@
+body{
+    background-color: grey;
+    font-family: Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+.content {
+    width: 100%;
+}
