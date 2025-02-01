@@ -18,7 +18,7 @@ export class List {
         this.listData[index] = temp;
         this.listData.shift();
         this.listData.sort();
-        return "Deleted ${item} from ${this.listName} at index ${index}";
+        return `Deleted ${item} from ${this.listName} at index ${index}`;
     }
 
     getLength(){
@@ -26,6 +26,7 @@ export class List {
     }
 
     getList(){
+        console.log(this.listData[0])
         return this.listData;
     }
 }

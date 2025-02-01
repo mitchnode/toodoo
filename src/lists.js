@@ -26,36 +26,58 @@ function add_new_list() {
 }
 
 function confirm_new_list(listName) {
+    const listdiv = document.createElement("div");
+    listdiv.id = listName;
+    lists.appendChild(listdiv);
     const list = new List(listName);
     const listTitle = document.createElement("h2");
     listTitle.id = "title";
     listTitle.textContent = listName;
     lists.appendChild(listTitle);
 
-    const newItemValue = document.createElement("input")
-    lists.appendChild(newItemValue)
+    const newItemValue = document.createElement("input");
+    lists.appendChild(newItemValue);
     const newItemButton = document.createElement("button");
     newItemButton.id = "new";
     newItemButton.textContent = "+";
     newItemButton.addEventListener("mouseover", () => { newItemButton.setAttribute("style","background-color:coral;");});
     newItemButton.addEventListener("mouseout", () => { newItemButton.setAttribute("style","");});
     newItemButton.addEventListener("click", () => { newItem(list, newItemValue.value); newItemValue.value = ''});
-    lists.appendChild(newItemButton)
+    lists.appendChild(newItemButton);
 }
 
 function newItem(list, newItemValue){
     list.addToList(newItemValue);
-    const item = document.createElement("p");
-    item.id = "item";
-    item.textContent = newItemValue
-    lists.appendChild(item)
-    const deleteItemButton = document.createElement("button");
-    deleteItemButton.id = "delete";
-    deleteItemButton.textContent = "X";
-    deleteItemButton.addEventListener("mouseover", () => { deleteItemButton.setAttribute("style","background-color:red;");});
-    deleteItemButton.addEventListener("mouseout", () => { deleteItemButton.setAttribute("style","");});
-    deleteItemButton.addEventListener("click", () => { list.removeFromList(newItemValue); lists.removeChild(deleteItemButton); lists.removeChild(item)});
-    lists.appendChild(deleteItemButton)
+    const listdiv = clearList(list.listName)
+    refreshList(list, listdiv);
+}
+
+function deleteItem(list, item){
+    console.log(list.removeFromList(item));
+    const listdiv = clearList(list.listName);
+    refreshList(list, listdiv);
+}
+
+function refreshList(list, listdiv){
+    for (var item of list.getList()) {
+        const itemString = document.createElement("p");
+        itemString.id = "item";
+        itemString.textContent = item;
+        listdiv.appendChild(itemString);
+        const deleteItemButton = document.createElement("button");
+        deleteItemButton.id = "delete";
+        deleteItemButton.textContent = "X";
+        deleteItemButton.addEventListener("mouseover", () => { deleteItemButton.setAttribute("style","background-color:red;");});
+        deleteItemButton.addEventListener("mouseout", () => { deleteItemButton.setAttribute("style","");});
+        deleteItemButton.addEventListener("click", () => { deleteItem(list, item)});
+        listdiv.appendChild(deleteItemButton);
+    }
+}
+
+function clearList(listName){
+    const listdiv = document.getElementById(listName);
+    listdiv.replaceChildren();
+    return listdiv;
 }
 
 const new_list = document.createElement("button");
