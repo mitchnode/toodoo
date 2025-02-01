@@ -49,6 +49,13 @@ function newItem(list, newItemValue){
     item.id = "item";
     item.textContent = newItemValue
     lists.appendChild(item)
+    const deleteItemButton = document.createElement("button");
+    deleteItemButton.id = "delete";
+    deleteItemButton.textContent = "X";
+    deleteItemButton.addEventListener("mouseover", () => { deleteItemButton.setAttribute("style","background-color:red;");});
+    deleteItemButton.addEventListener("mouseout", () => { deleteItemButton.setAttribute("style","");});
+    deleteItemButton.addEventListener("click", () => { list.removeFromList(newItemValue); lists.removeChild(deleteItemButton); lists.removeChild(item)});
+    lists.appendChild(deleteItemButton)
 }
 
 const new_list = document.createElement("button");

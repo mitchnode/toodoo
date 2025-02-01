@@ -12,7 +12,7 @@ export class List {
     }
 
     removeFromList(item){
-        var index = this.listData.findIndex(item);
+        var index = this.listData.indexOf(item);
         var temp = this.listData[0];
         this.listData[0] = this.listData[index];
         this.listData[index] = temp;
