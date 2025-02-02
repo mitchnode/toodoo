@@ -8,15 +8,36 @@ title.textContent = "Lists";
 lists.appendChild(title);
 
 function add_new_list() {
+    
     lists.removeChild(new_list);
     const new_list_name = document.createElement("input");
     lists.appendChild(new_list_name);
     const new_list_confirm = document.createElement("button");
     new_list_confirm.id = "new";
-    new_list_confirm.textContent = "O";
+    new_list_confirm.textContent = "Add";
     new_list_confirm.addEventListener("mouseover", () => { new_list_confirm.setAttribute("style","background-color:coral;");});
     new_list_confirm.addEventListener("mouseout", () => { new_list_confirm.setAttribute("style","");});
-    new_list_confirm.addEventListener("click", () => { lists.removeChild(new_list_name); lists.removeChild(new_list_confirm); confirm_new_list(new_list_name.value)});
+    new_list_confirm.addEventListener("click", () => { 
+        if(new_list_name.value != '') {
+            var warning = document.getElementById("warning");
+            if(warning){
+                lists.removeChild(warning);
+            }
+            lists.removeChild(new_list_name);
+            lists.removeChild(new_list_confirm);
+            confirm_new_list(new_list_name.value);
+        } else {
+            var warning = document.getElementById("warning");
+            if(warning){
+                lists.removeChild(warning);
+            }
+            warning = document.createElement("p");
+            warning.id = "warning";
+            warning.textContent = "List must have a name";
+            warning.setAttribute("style", "color: red;");
+            lists.appendChild(warning);
+        }
+    });
     lists.appendChild(new_list_confirm);
     //const new_list = document.createElement("div");
     //new_list.id = count
@@ -40,7 +61,7 @@ function confirm_new_list(listName) {
     lists.appendChild(newItemValue);
     const newItemButton = document.createElement("button");
     newItemButton.id = "new";
-    newItemButton.textContent = "+";
+    newItemButton.textContent = "Add task";
     newItemButton.addEventListener("mouseover", () => { newItemButton.setAttribute("style","background-color:coral;");});
     newItemButton.addEventListener("mouseout", () => { newItemButton.setAttribute("style","");});
     newItemButton.addEventListener("click", () => { newItem(list, newItemValue.value); newItemValue.value = ''});
@@ -84,7 +105,7 @@ function clearList(listName){
 
 const new_list = document.createElement("button");
 new_list.id = "new";
-new_list.textContent = "+";
+new_list.textContent = "Add new list";
 new_list.addEventListener("mouseover", () => { new_list.setAttribute("style","background-color:coral;");});
 new_list.addEventListener("mouseout", () => { new_list.setAttribute("style","");});
 new_list.addEventListener("click", () => { add_new_list()});
