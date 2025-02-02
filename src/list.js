@@ -26,7 +26,7 @@ export class List {
     }
 
     getList(){
-        console.log(this.listData[0])
+        //console.log(this.listData[0])
         return this.listData;
     }
 }

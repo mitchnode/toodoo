@@ -65,11 +65,11 @@ function refreshList(list, listdiv){
         itemString.textContent = item;
         listdiv.appendChild(itemString);
         const deleteItemButton = document.createElement("button");
-        deleteItemButton.id = "delete";
+        deleteItemButton.id = item;
         deleteItemButton.textContent = "X";
         deleteItemButton.addEventListener("mouseover", () => { deleteItemButton.setAttribute("style","background-color:red;");});
         deleteItemButton.addEventListener("mouseout", () => { deleteItemButton.setAttribute("style","");});
-        deleteItemButton.addEventListener("click", () => { deleteItem(list, item)});
+        deleteItemButton.addEventListener("click", function () { deleteItem(list, this.id) });
         listdiv.appendChild(deleteItemButton);
     }
 }
