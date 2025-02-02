@@ -1,3 +1,4 @@
+import { Task } from "./task.js";
 
 export class List {
     constructor(listName){
@@ -6,19 +7,19 @@ export class List {
         this.length = 0;
     }
 
-    addToList(item){
-        this.listData.push(item);
+    addToList(taskname){
+        this.listData.push(new Task(taskname));
         this.listData.sort();
     }
 
-    removeFromList(item){
-        var index = this.listData.indexOf(item);
+    removeFromList(taskindex){
+        var taskname = this.listData[taskindex].getName();
         var temp = this.listData[0];
-        this.listData[0] = this.listData[index];
-        this.listData[index] = temp;
+        this.listData[0] = this.listData[taskindex];
+        this.listData[taskindex] = temp;
         this.listData.shift();
         this.listData.sort();
-        return `Deleted ${item} from ${this.listName} at index ${index}`;
+        return `Deleted ${taskname} from ${this.listName} at index ${taskindex}`;
     }
 
     getLength(){
@@ -27,6 +28,10 @@ export class List {
 
     getList(){
         //console.log(this.listData[0])
-        return this.listData;
+        return this.listData.entries();
+    }
+
+    completeTask(task){
+        task.complete = true;
     }
 }
