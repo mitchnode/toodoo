@@ -32,6 +32,6 @@ export class List {
     }
 
     completeTask(task){
-        task.complete = true;
+        task.completeTask();
     }
 }
