@@ -1,27 +1,44 @@
 import { List } from "./list.js";
 
 export class ListView {
-    constructor(listname, parent){
-        this.listname = listname;
-        this.list = new List(this.listname);
+    constructor(list, parent){
+        this.list = list;
+        this.listname = this.list.getName();
         this.parent = parent;
+        this.placeContainer();
         this.placeTitle();
         this.placeTaskInput();
         this.placeListBlock();
+    }
+
+    closeContainer(){
+        this.parent.removeChild(this.container);
+    }
+
+    placeContainer(){
+        this.container = document.createElement("div");
+        this.container.id = "listview";
+        this.parent.appendChild(this.container);
     }
 
     placeTitle(){
         const listtitle = document.createElement("h2");
         listtitle.id = "title";
         listtitle.textContent = this.listname;
-        this.parent.appendChild(listtitle);
-
+        this.container.appendChild(listtitle);
+        const closebutton = document.createElement("button");
+        closebutton.textContent = "Close";
+        closebutton.addEventListener("click", () => {
+            this.closeContainer();
+            // Load dashboard again
+        })
+        this.container.appendChild(closebutton);
     }
 
     placeListBlock(){
         this.listblock = document.createElement("div");
         this.listblock.id = this.listname;
-        this.parent.appendChild(this.listblock);
+        this.container.appendChild(this.listblock);
     }
 
     placeTaskInput(){
@@ -30,8 +47,8 @@ export class ListView {
         addtaskButton.id = "add";
         addtaskButton.textContent = "Add task";
         addtaskButton.addEventListener("click", () => { this.addTask(tasknameInput.value); tasknameInput.value = ''});
-        this.parent.appendChild(tasknameInput);
-        this.parent.appendChild(addtaskButton);
+        this.container.appendChild(tasknameInput);
+        this.container.appendChild(addtaskButton);
     }
 
     addTask(taskname){

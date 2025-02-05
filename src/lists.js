@@ -1,8 +1,6 @@
 export const lists = document.createElement("div");
 import { ListView } from "./listview.js"
 
-var count = 1;
-
 const title = document.createElement("h1");
 title.textContent = "Lists";
 lists.appendChild(title);
@@ -37,11 +35,6 @@ function add_new_list() {
         }
     });
     lists.appendChild(new_list_confirm);
-    //const new_list = document.createElement("div");
-    //new_list.id = count
-    //new_list.className = "list";
-    //lists.appendChild(new_list);
-    //count += 1;
 }
 
 const new_list = document.createElement("button");

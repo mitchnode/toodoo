@@ -73,8 +73,28 @@ button.delete:hover {
     background-color: chocolate;
 }
 
+.toodoobutton {
+    width: 150px;
+    height: 25px;
+    padding: 2px;
+    background-color: rgb(100, 237, 107);
+}
+
+.toodoobutton:hover {
+    background-color: coral;
+}
+
 .list {
     background-color: blueviolet;
     height: 100px;
     border: 1px black solid;
+}
+
+.toodoobox {
+    border: 1px black solid;
+    border-radius: 10px;
+}
+
+.toodoobox:hover{
+    background-color: cadetblue;
 }

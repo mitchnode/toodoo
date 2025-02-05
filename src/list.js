@@ -7,6 +7,10 @@ export class List {
         this.length = 0;
     }
 
+    getName(){
+        return this.listName;
+    }
+
     addToList(taskname){
         this.listData.push(new Task(taskname));
         this.listData.sort();
@@ -23,7 +27,7 @@ export class List {
     }
 
     getLength(){
-        return this.listData.length()
+        return this.listData.length;
     }
 
     getList(){
