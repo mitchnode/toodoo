@@ -1,5 +1,8 @@
 import { dashboard } from "./dashboard.js";
 import { toodoo } from "./toodoo.js";
+import { toodoo_store } from "./toodoo_store.js";
+
+var store = new toodoo_store();
 
 export const listinputbox = document.createElement("div");
 listinputbox.id = "inputbox";
@@ -20,10 +23,12 @@ listaddbutton.addEventListener("click", () => {
         }
         const inputbox = document.getElementById("inputbox");
         dashboard.removeChild(inputbox);
-        var toodoolist = new toodoo(listinput.value);
+        var toodoolist = new toodoo(listinput.value,store);
+        store.add_toodoo(toodoolist);
         listinput.value = '';
         toodoolist.placeTooDoo(dashboard);
     } else {
+        console.log(store);
         var warning = document.getElementById("warning");
         if(warning){
             dashboard.removeChild(warning);

@@ -1,18 +1,6 @@
-import { listinputbox } from "./listinput.js";
+import { buildDashboard } from "./build_dashboard.js";
+import { toodoo_store } from "./toodoo_store.js";
 
 export const dashboard = document.createElement("div");
 dashboard.className = "dashboard";
-const dashboard_title = document.createElement("h2");
-dashboard_title.textContent = "Dashboard";
-dashboard.appendChild(dashboard_title);
-
-function load_page(page) {
-    console.log(`Adding ${page} to content`)
-    dashboard.appendChild(page)
-}
-
-var new_toodoo_button = document.createElement("button");
-new_toodoo_button.className = "toodoobutton";
-new_toodoo_button.textContent = "Add TooDoo List"
-new_toodoo_button.addEventListener("click", () => { load_page(listinputbox);})
-dashboard.appendChild(new_toodoo_button);
+buildDashboard(dashboard, new toodoo_store);

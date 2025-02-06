@@ -1,14 +1,19 @@
-import { List } from "./list.js";
+import { buildDashboard } from "./build_dashboard.js";
 
 export class ListView {
-    constructor(list, parent){
+    constructor(list, parent, store){
         this.list = list;
         this.listname = this.list.getName();
         this.parent = parent;
+        this.store = store;
         this.placeContainer();
         this.placeTitle();
         this.placeTaskInput();
         this.placeListBlock();
+    }
+
+    load_dashboard() {
+        buildDashboard(this.parent, this.store);
     }
 
     closeContainer(){
@@ -30,6 +35,8 @@ export class ListView {
         closebutton.textContent = "Close";
         closebutton.addEventListener("click", () => {
             this.closeContainer();
+            console.log(this.store)
+            this.load_dashboard();
             // Load dashboard again
         })
         this.container.appendChild(closebutton);
