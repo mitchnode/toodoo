@@ -3,4 +3,4 @@ import { toodoo_store } from "./toodoo_store.js";
 
 export const dashboard = document.createElement("div");
 dashboard.className = "dashboard";
-buildDashboard(dashboard, new toodoo_store);
+buildDashboard(dashboard);

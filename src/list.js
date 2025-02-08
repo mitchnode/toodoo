@@ -1,10 +1,14 @@
 import { Task } from "./task.js";
 
 export class List {
-    constructor(listName){
+    constructor(listName, rebuild = false){
         this.listName = listName;
         this.listData = [];
         this.length = 0;
+        if(rebuild == false){
+            this.updateStoredLists();
+            this.storeList()
+        }
     }
 
     getName(){
@@ -14,6 +18,7 @@ export class List {
     addToList(taskname){
         this.listData.push(new Task(taskname));
         this.listData.sort();
+        this.storeList()
     }
 
     removeFromList(taskindex){
@@ -23,6 +28,7 @@ export class List {
         this.listData[taskindex] = temp;
         this.listData.shift();
         this.listData.sort();
+        this.storeList()
         return `Deleted ${taskname} from ${this.listName} at index ${taskindex}`;
     }
 
@@ -31,11 +37,26 @@ export class List {
     }
 
     getList(){
-        //console.log(this.listData[0])
-        return this.listData.entries();
+        return this.listData;
     }
 
     completeTask(task){
         task.completeTask();
+    }
+
+    storeList(){
+        localStorage.setItem(this.listName, JSON.stringify(this.listData));
+    }
+
+    updateStoredLists(){
+        if(localStorage.getItem("Lists")) {
+            this.storedlists = JSON.parse(localStorage.getItem("Lists"));
+        }
+        else {
+            this.storedlists = [];
+        }
+        this.storedlists.push(this.listName);
+        localStorage.setItem("Lists", JSON.stringify(this.storedlists));
+        console.log(localStorage.getItem("Lists"));
     }
 }
