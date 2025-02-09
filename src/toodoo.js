@@ -1,5 +1,6 @@
 import { List } from "./list.js";
 import { ListView } from "./listview.js"
+import { buildDashboard } from "./build_dashboard.js";
 
 export class toodoo {
     constructor(listname, rebuild = false){
@@ -27,10 +28,19 @@ export class toodoo {
         title.textContent = this.listName;
         const listinfo = document.createElement("p");
         listinfo.className = "toodooinfo";
-        listinfo.textContent = this.list.getLength();        
+        listinfo.textContent = this.list.getLength();
+        const delete_button = document.createElement("button");
+        delete_button.textContent = "X";
+        delete_button.className = "delete";
+        delete_button.addEventListener("click", () => {
+            this.list.deleteList();
+            parent.replaceChildren();
+            buildDashboard(parent);
+        });
         box.appendChild(title);
         box.appendChild(listinfo);
         parent.appendChild(box);
+        parent.appendChild(delete_button);
     }
 
     getList(){

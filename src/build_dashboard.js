@@ -6,18 +6,21 @@ export function buildDashboard(dashboard){
     dashboard_title.textContent = "Dashboard";
     dashboard.appendChild(dashboard_title);
 
-    console.log()
+    var new_toodoo_button = document.createElement("button");
+    new_toodoo_button.className = "toodoobutton";
+    new_toodoo_button.textContent = "Add TooDoo List"
+    new_toodoo_button.addEventListener("click", () => { load_page(listinputbox);})
+    dashboard.appendChild(new_toodoo_button);
+ 
     var lists = JSON.parse(localStorage.getItem("Lists"));
     try {
         for(var list of lists) {
             var list_obj = new toodoo(list, true);
             
             var tasks = JSON.parse(localStorage.getItem(list));
-            console.log(tasks);
             for (var i = 0; i < tasks.length; i++) {
                 list_obj.getList().addToList(tasks[i].taskname)
             }
-            console.log(list_obj.getList().getList());
             list_obj.placeTooDoo(dashboard);
         }
     }
@@ -28,11 +31,5 @@ export function buildDashboard(dashboard){
     function load_page(page) {
         console.log(`Adding ${page} to content`)
         dashboard.appendChild(page)
-    }
-
-    var new_toodoo_button = document.createElement("button");
-    new_toodoo_button.className = "toodoobutton";
-    new_toodoo_button.textContent = "Add TooDoo List"
-    new_toodoo_button.addEventListener("click", () => { load_page(listinputbox);})
-    dashboard.appendChild(new_toodoo_button);
+    }    
 }

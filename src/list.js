@@ -56,6 +56,14 @@ export class List {
         }
         this.storedlists.push(this.listName);
         localStorage.setItem("Lists", JSON.stringify(this.storedlists));
-        console.log(localStorage.getItem("Lists"));
+    }
+
+    deleteList(){
+        this.storedlists = JSON.parse(localStorage.getItem("Lists"));
+        const index = this.storedlists.indexOf(this.listName);
+        this.storedlists.splice(index, 1);
+        localStorage.setItem("Lists", JSON.stringify(this.storedlists));
+        localStorage.removeItem(this.listName);
+        console.log(`Deleted: ${this.listName}`);
     }
 }
