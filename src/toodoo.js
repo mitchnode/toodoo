@@ -5,7 +5,6 @@ export class toodoo {
     constructor(listname, rebuild = false){
         this.list = new List(listname, rebuild);
         this.listName = this.list.getName();
-        this.listLength = this.list.getLength();
     }
    
     setName(name){
@@ -28,7 +27,7 @@ export class toodoo {
         title.textContent = this.listName;
         const listinfo = document.createElement("p");
         listinfo.className = "toodooinfo";
-        listinfo.textContent = this.listLength;        
+        listinfo.textContent = this.list.getLength();        
         box.appendChild(title);
         box.appendChild(listinfo);
         parent.appendChild(box);

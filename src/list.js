@@ -4,7 +4,6 @@ export class List {
     constructor(listName, rebuild = false){
         this.listName = listName;
         this.listData = [];
-        this.length = 0;
         if(rebuild == false){
             this.updateStoredLists();
             this.storeList()
