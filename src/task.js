@@ -42,4 +42,8 @@ export class Task {
     completeTask(){
         this.complete = true;
     }
+
+    uncompleteTask(){
+        this.complete = false;
+    }
 }

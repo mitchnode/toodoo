@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { buildDashboard } from "./build_dashboard.js";
 
 export class ListView {
@@ -36,7 +37,6 @@ export class ListView {
         closebutton.addEventListener("click", () => {
             this.closeContainer();
             this.load_dashboard();
-            // Load dashboard again
         })
         this.container.appendChild(closebutton);
     }
@@ -67,22 +67,72 @@ export class ListView {
         this.refreshList();
     }
 
+    toggleCompleteTask(taskindex){
+        
+        
+        var taskline = document.getElementById(`taskline-${taskindex}`);
+        if (taskline.className == "completed-task"){
+            taskline.className = "";
+            this.list.getList()[taskindex].uncompleteTask();
+        } else {
+            taskline.className = "completed-task";
+            this.list.getList()[taskindex].completeTask();
+        }
+        this.list.storeList();
+    }
+
     placeTask(task){
         var taskname = task[1].getName();
+        var taskdescription = task[1].getDescription()
+        var taskduedate = format(task[1].getDueDate(), 'dd-MM-yyyy');
+        var taskpriority = task[1].getPriority();
+        var taskcomplete = task[1].getComplete();
         var taskindex = task[0];
-        const taskline = document.createElement("p");
-        taskline.id = "task";
-        taskline.textContent = taskname;
+        const taskline = document.createElement("div");
+        taskline.id = `taskline-${taskindex}`;
+        if(taskcomplete){
+            taskline.className = "completed-task";
+        }
+
+        const tasktitle = document.createElement("h3");
+        tasktitle.id = "title";
+        tasktitle.textContent = taskname;
+
+        const description = document.createElement("p");
+        description.id = "description";
+        description.textContent = taskdescription;
+
+        const duedate = document.createElement("p");
+        duedate.id = "duedate";
+        duedate.textContent = taskduedate;
+
+        const priority = document.createElement("p");
+        priority.id = "priority";
+        priority.textContent = taskpriority;
+
+        const completeButton = document.createElement("button");
+        completeButton.id = taskindex;
+        completeButton.className = "complete";
+        completeButton.textContent = "✓";
+        completeButton.addEventListener("click", (e) => { this.toggleCompleteTask(e.target.id); });
+
         const deleteButton = document.createElement("button");
         deleteButton.id = taskindex;
         deleteButton.className = "delete";
         deleteButton.textContent = "X";
         deleteButton.addEventListener("click", (e) => { this.deleteTask(e.target.id); });
-        this.listblock.appendChild(taskline);
+
+        taskline.appendChild(tasktitle);
+        taskline.appendChild(description);
+        taskline.appendChild(duedate);
+        taskline.appendChild(priority);
+        taskline.appendChild(completeButton);
         taskline.appendChild(deleteButton);
+        this.listblock.appendChild(taskline);
     }
 
     refreshList(){
+        this.list.storeList();
         this.listblock.replaceChildren();
         for (var task of this.list.getList().entries()) {
             this.placeTask(task);

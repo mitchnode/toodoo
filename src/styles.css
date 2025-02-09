@@ -73,6 +73,18 @@ button.delete:hover {
     background-color: chocolate;
 }
 
+button.complete {
+    width: 25px;
+    height: 25px;
+    padding: 2px;
+    margin-left: 10px;
+    background-color: rgb(51, 255, 51);
+}
+
+button.complete:hover {
+    background-color: rgb(30, 210, 210);
+}
+
 .toodoobutton {
     width: 150px;
     height: 25px;
@@ -97,4 +109,12 @@ button.delete:hover {
 
 .toodoobox:hover{
     background-color: cadetblue;
+}
+
+.completed-task p,.completed-task h3{
+    text-decoration: line-through;
+}
+
+.completed-task button.complete {
+    background-color: grey;
 }

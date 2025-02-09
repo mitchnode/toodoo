@@ -20,6 +20,13 @@ export function buildDashboard(dashboard){
             var tasks = JSON.parse(localStorage.getItem(list));
             for (var i = 0; i < tasks.length; i++) {
                 list_obj.getList().addToList(tasks[i].taskname)
+                var task = list_obj.getList().getList()[i];
+                task.setDescription(tasks[i].description);
+                task.setDueDate(tasks[i].duedate);
+                task.setPriority(tasks[i].priority);
+                if(tasks[i].complete){
+                    task.completeTask();
+                }
             }
             list_obj.placeTooDoo(dashboard);
         }

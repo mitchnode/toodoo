@@ -43,6 +43,10 @@ export class List {
         task.completeTask();
     }
 
+    uncompleteTask(task){
+        task.completeTask();
+    }
+
     storeList(){
         localStorage.setItem(this.listName, JSON.stringify(this.listData));
     }
