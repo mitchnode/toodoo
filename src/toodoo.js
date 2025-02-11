@@ -17,6 +17,8 @@ export class toodoo {
     }
 
     placeTooDoo(parent){
+        const toodoocontainer = document.createElement("div");
+        toodoocontainer.className = "toodoocontainer";
         const box = document.createElement("div");
         box.className = "toodoobox";
         box.addEventListener("click", () => {
@@ -28,7 +30,7 @@ export class toodoo {
         title.textContent = this.listName;
         const listinfo = document.createElement("p");
         listinfo.className = "toodooinfo";
-        listinfo.textContent = this.list.getLength();
+        listinfo.textContent = `toodoo items: ${this.list.getLength()}`;
         const delete_button = document.createElement("button");
         delete_button.textContent = "X";
         delete_button.className = "delete";
@@ -39,8 +41,9 @@ export class toodoo {
         });
         box.appendChild(title);
         box.appendChild(listinfo);
-        parent.appendChild(box);
-        parent.appendChild(delete_button);
+        toodoocontainer.appendChild(box);
+        toodoocontainer.appendChild(delete_button);
+        parent.appendChild(toodoocontainer);
     }
 
     getList(){
